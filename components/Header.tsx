@@ -1,8 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
-import WeatherImg from "./WeatherImg";
-import { useFonts } from "expo-font";
 import { Weather } from "@/types/weather";
+import WeatherConditions from "./WeatherConditions";
 
 type HeaderProps = {
   weather: Weather;
@@ -15,6 +14,8 @@ const description = weather?.list[0].weather[0] || "غير متوفر";
 const temp = weather?.list[0].main?.temp || 0;
 const temp_min = weather?.list[0].main?.temp_min || 0;
 const temp_max = weather?.list[0].main?.temp_max || 0;
+const clouds = weather?.list[0].clouds?.all || 0;
+
 
 
   return (
@@ -42,9 +43,10 @@ const temp_max = weather?.list[0].main?.temp_max || 0;
             </Text>
           </View>
         </View>
-        <View>
-          <Text>
-            {description.description}
+        <View style={styles.weatherAdverbs}>
+          <Text style={styles.weatherAdverb}>
+            <WeatherConditions temp={temp} cloud={clouds} />
+            {/* {description.description} */}
           </Text>
         </View>
         <View />
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    height: "100%"
+    height: "100%",
   },
   temp: {
     fontSize: 70,
@@ -101,10 +103,23 @@ const styles = StyleSheet.create({
     paddingVertical: 5
   },
   min: {
-    color: "#0D92F4"
+    color: "#525CEB"
   },
   max: {
-    color: "#FF7F3E"
+    color: "#FC4100"
+  },
+  weatherAdverbs: {
+    width: "70%",
+    alignItems: "flex-end",
+    textAlign: "left",
+    marginRight: 20,
+    marginLeft: 5
+  },
+  weatherAdverb: {
+    textAlign: "center",
+    fontSize: 20,
+    color: "#222831",
+    marginTop: 25
   }
 });
 
