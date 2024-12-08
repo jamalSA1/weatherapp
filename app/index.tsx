@@ -7,7 +7,8 @@ import {
   View,
   Alert,
   RefreshControl,
-  ScrollView
+  ScrollView,
+  ImageBackground
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
@@ -15,6 +16,7 @@ import * as Location from "expo-location";
 import { Weather } from "@/types/weather";
 import {OPENCAGE_API_KEY} from "@/my-keys/all-keys";
 import {OPNEWEATHER_API_KEY} from "@/my-keys/all-keys";
+import WeatherInfo from "@/components/WeatherInfo";
 
 
 const index = () => {
@@ -29,6 +31,8 @@ const index = () => {
       const response = await fetch(url);
       const data = await response.json();
       setWeather(data);
+      console.log(data.list[0]);
+      
       
       const now = new Date();
       const hours = now.getHours();
@@ -90,31 +94,22 @@ if (!weather) {
       <Text>تعذر تحميل بيانات الطقس</Text>
     </View>
   );
-}
+}  
 
-
-// const name = weather?.city.name || "الموقع غير معروف";
-// const description = weather?.list[0].weather[0] || "غير متوفر";
-// const temp = weather?.list[0].main?.temp || 0;
-// const temp_min = weather?.list[0].main?.temp_min || 0;
-// const temp_max = weather?.list[0].main?.temp_max || 0;
-
-  
-  
 
   return (
     <>
+    <StatusBar barStyle="dark-content" />
+
     <SafeAreaView>
-      <StatusBar barStyle="dark-content" />
-      <ScrollView style={{height: '100%'}} refreshControl={
+      <ScrollView  refreshControl={
         <RefreshControl refreshing={loading} onRefresh={getLocation} />
       }>
       <View>
         <Header weather={weather} />
 
-          {lastUpdated && ( 
-          <Text style={styles.addressText}>آخر تحديث: {lastUpdated}</Text>
-        )}
+        <WeatherInfo weather={weather} lastUpdated={lastUpdated} />
+
       </View>
       </ScrollView>
     </SafeAreaView>

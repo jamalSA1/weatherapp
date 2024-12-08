@@ -10,10 +10,11 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({weather}) => {
 
   const name = weather?.city.name || "الموقع غير معروف";
-const description = weather?.list[0].weather[0] || "غير متوفر";
 const temp = weather?.list[0].main?.temp || 0;
 const temp_min = weather?.list[0].main?.temp_min || 0;
 const temp_max = weather?.list[0].main?.temp_max || 0;
+const humidity = weather?.list[0].main?.humidity || 0;
+const pressure = weather?.list[0].main?.pressure || 0;
 const clouds = weather?.list[0].clouds?.all || 0;
 
 
@@ -45,20 +46,10 @@ const clouds = weather?.list[0].clouds?.all || 0;
         </View>
         <View style={styles.weatherAdverbs}>
           <Text style={styles.weatherAdverb}>
-            <WeatherConditions temp={temp} cloud={clouds} />
-            {/* {description.description} */}
+            <WeatherConditions temp={temp} cloud={clouds} humidity={humidity} pressure={pressure} />
           </Text>
         </View>
         <View />
-        {/* <View>
-          {main === "Clear"
-            ? <WeatherImg source={require("../assets/images/sun.png")} />
-            : main === "Clouds"
-              ? <WeatherImg source={require("../assets/images/cloud.png")} />
-              : main === "Rain"
-                ? <WeatherImg source={require("../assets/images/rain.png")} />
-                : "غير معروف"}
-        </View> */}
       </View>
     </ScrollView>
   );
