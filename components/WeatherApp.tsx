@@ -8,6 +8,7 @@ import {
   RefreshControl,
   ScrollView,
   Text,
+  Image,
 } from "react-native";
 import { useQuery } from "react-query";
 import Header from "@/components/Header";
@@ -46,7 +47,7 @@ const WeatherApp = () => {
   if (locationQuery.isLoading || weatherQuery.isLoading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" color="blue" />
+        <Image source={require("../assets/animation/sunLoading.gif")} />
       </View>
     );
   }
@@ -63,10 +64,9 @@ const WeatherApp = () => {
     <SafeAreaView
       style={[
         styles.container,
-        { backgroundColor: isDayTime ? "lightblue" : "darkblue" },
       ]}
     >
-      <StatusBar barStyle={isDayTime ? "dark-content" : "light-content"} />
+      <StatusBar barStyle={ "dark-content"} />
       <ScrollView
         refreshControl={
           <RefreshControl
@@ -96,6 +96,7 @@ const WeatherApp = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#eee",
   },
   center: {
     flex: 1,

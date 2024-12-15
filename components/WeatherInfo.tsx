@@ -11,38 +11,45 @@ type WeatherInfoProps = {
 
 const WeatherInfo = ({ weather, lastUpdated, isDayTime }: WeatherInfoProps) => {
   const main = weather.list[0].weather[0].main;
+  console.log(isDayTime);
 
   const getWeatherAssets = (main: string) => {
+    if (main === "Clear") {
+      return {
+        image: isDayTime
+          ? require("../assets/weatherIcon/morning/Sun.png")
+          : require("../assets/weatherIcon/evening/moon.png"),
+        animation: isDayTime
+          ? require("../assets/images/icon.png") // أنيميشن النهار
+          : require("../assets/images/icon.png") // أنيميشن الليل
+      };
+    }
+
     switch (main) {
-      case "Clear":
-        return {
-          image: require("../assets/weatherIcon/Sun.png"),
-          animation: require("../assets/images/bunny.png")
-        };
       case "Clouds":
         return {
-          image: require("../assets/weatherIcon/Sun-cloud.png"),
-          animation: require("../assets/images/sun.png")
+          image: require("../assets/weatherIcon/cloud.png")
+          // animation: require("../assets/images/sun.png")
         };
       case "Thunderstorm":
         return {
-          image: require("../assets/images/thunderstorm.png"),
-          animation: require("../assets/images/sun.png")
+          image: require("../assets/weatherIcon/thunderstorm.png")
+          // animation: require("../assets/images/sun.png")
         };
       case "Drizzle":
         return {
-          image: require("../assets/images/drizzle.png"),
-          animation: require("../assets/images/sun.png")
+          image: require("../assets/weatherIcon/drizzle.png")
+          // animation: require("../assets/images/sun.png")
         };
       case "Snow":
         return {
-          image: require("../assets/images/snow.png"),
-          animation: require("../assets/images/sun.png")
+          image: require("../assets/weatherIcon/snow.png")
+          // animation: require("../assets/images/sun.png")
         };
       case "Rain":
         return {
-          image: require("../assets/images/rain.png"),
-          animation: require("../assets/images/sun.png")
+          image: require("../assets/weatherIcon/rain.png")
+          // animation: require("../assets/images/sun.png")
         };
       default:
         return { image: null, animation: null };
