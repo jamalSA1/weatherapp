@@ -6,9 +6,10 @@ import WeatherImg from "./WeatherImg";
 type WeatherInfoProps = {
   weather: Weather;
   lastUpdated: string | null;
+  isDayTime: boolean;
 };
 
-const WeatherInfo = ({ weather, lastUpdated }: WeatherInfoProps) => {
+const WeatherInfo = ({ weather, lastUpdated, isDayTime }: WeatherInfoProps) => {
   const main = weather.list[0].weather[0].main;
 
   const getWeatherAssets = (main: string) => {

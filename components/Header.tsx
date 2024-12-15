@@ -5,9 +5,10 @@ import WeatherConditions from "./WeatherConditions";
 
 type HeaderProps = {
   weather: Weather;
+  isDayTime: boolean;
 };
 
-const Header: React.FC<HeaderProps> = ({weather}) => {
+const Header: React.FC<HeaderProps> = ({weather, isDayTime}) => {
 
   const name = weather?.city.name || "الموقع غير معروف";
 const temp = weather?.list[0].main?.temp || 0;
